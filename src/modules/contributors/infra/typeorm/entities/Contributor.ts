@@ -1,6 +1,6 @@
 import { v4 as uuidV4 } from "uuid";
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryColumn } from "typeorm";
-import { Team } from "@modules/teams/infra/typeorm/entities/Team";
+import { Team } from "../../../../teams/infra/typeorm/entities/Team";
 
 @Entity('contributors')
 class Contributor {

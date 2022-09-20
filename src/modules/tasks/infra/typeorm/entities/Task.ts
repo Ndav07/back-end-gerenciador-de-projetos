@@ -1,6 +1,6 @@
 import { v4 as uuidV4 } from "uuid";
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryColumn } from "typeorm";
-import { Project } from "@modules/projects/infra/typeorm/entities/Project";
+import { Project } from "../../../../projects/infra/typeorm/entities/Project";
 
 @Entity('tasks')
 class Task {

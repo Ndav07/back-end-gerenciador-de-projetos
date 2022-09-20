@@ -1,7 +1,7 @@
 import { v4 as uuidV4 } from "uuid";
 import { Column, CreateDateColumn, Entity, OneToOne, JoinColumn, PrimaryColumn } from "typeorm";
-import { Contributor } from "@modules/contributors/infra/typeorm/entities/Contributor";
-import { Task } from "@modules/tasks/infra/typeorm/entities/Task";
+import { Contributor } from "../../../../contributors/infra/typeorm/entities/Contributor";
+import { Task } from "../../../../tasks/infra/typeorm/entities/Task";
 
 @Entity('contributorstasks')
 class ContributorsTasks {

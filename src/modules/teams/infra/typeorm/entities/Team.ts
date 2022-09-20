@@ -1,7 +1,7 @@
 import { v4 as uuidV4 } from "uuid";
 import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
-import { Contributor } from "@modules/contributors/infra/typeorm/entities/Contributor";
-import { Project } from "@modules/projects/infra/typeorm/entities/Project";
+import { Contributor } from "../../../../contributors/infra/typeorm/entities/Contributor";
+import { Project } from "../../../../projects/infra/typeorm/entities/Project";
 
 @Entity('teams')
 class Team {
