@@ -1,12 +1,12 @@
 import { DataSource } from "typeorm";
 
-const PostgresConnectDataBase = new DataSource({
+export const PostgresConnectDataBase = new DataSource({
     type: "postgres",
     host: "kesavan.db.elephantsql.com",
     port: 5432,
-    username: "ibkasbxq",
-    password: "8k48ScREc2xgd6n0qmS80PI8_Q1vse19",
-    database: "ibkasbxq",
+    username: "furcgnrs",
+    password: "del6rfgoHRu871R3JP-hwVVckwVCh-7c",
+    database: "furcgnrs",
     entities: ["./src/modules/**/infra/typeorm/entities/*.{ts,js}"],
     migrations: ["./src/shared/infra/typeorm/migrations/*.{ts,js}"]
 })

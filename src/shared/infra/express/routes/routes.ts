@@ -1,11 +1,11 @@
 import { Router } from "express";
 
-import { authenticateRoutes } from "@shared/infra/express/routes/authenticate.route";
 import { usersRouter } from "@shared/infra/express/routes/users.route";
+import { projectsRoutes } from "./projects.route";
 
 const router = Router();
 
-router.use(authenticateRoutes);
 router.use("/users", usersRouter);
+router.use("/projects", projectsRoutes);
 
 export { router };

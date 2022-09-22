@@ -1,15 +1,14 @@
-import { inject, injectable } from "tsyringe";
-
 import { Project } from "@modules/projects/infra/typeorm/entities/Project";
 import { IProjectsRepository } from "@modules/projects/repositories/IProjectsRepository";
+import { inject, injectable } from "tsyringe";
 
 @injectable()
-class ListProjectsUseCase {
+class ListProjectByIdUseCase {
     constructor(@inject("ProjectsRepository") private projectsRepository: IProjectsRepository) {}
-    async execute(): Promise<Project[]> {
-        const projects = this.projectsRepository.list();
-        return projects;
+    async execute(id: string): Promise<Project> {
+        const project = await this.projectsRepository.listById(id);
+        return project;
     }
 };
 
-export { ListProjectsUseCase };
+export { ListProjectByIdUseCase };
