@@ -1,6 +1,7 @@
 import { v4 as uuidV4 } from "uuid";
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryColumn } from "typeorm";
 import { Project } from "../../../../projects/infra/typeorm/entities/Project";
+import { Contributor } from "../../../../contributors/infra/typeorm/entities/Contributor";
 
 @Entity('tasks')
 class Task {
@@ -18,6 +19,9 @@ class Task {
 
     @ManyToOne(() => Project, project => project.tasks, { cascade: true })
     project: Project;
+    
+    @ManyToOne(() => Contributor, contributor => contributor.tasks, { nullable: true })
+    cotributor: Contributor;
 
     @CreateDateColumn({ type: "timestamp", default: "now()" })
     created_at: Date;
