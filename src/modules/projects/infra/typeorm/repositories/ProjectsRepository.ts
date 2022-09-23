@@ -1,7 +1,7 @@
 import { DataSource, Repository } from "typeorm";
 
-import { Project } from "@modules/projects/infra/typeorm/entities/Project";
 import { PostgresConnectDataBase } from "@shared/infra/typeorm/data-source";
+import { Project } from "@modules/projects/infra/typeorm/entities/Project";
 import { IProjectsRepository } from "@modules/projects/repositories/IProjectsRepository";
 
 class ProjectsRepository implements IProjectsRepository {
@@ -19,8 +19,13 @@ class ProjectsRepository implements IProjectsRepository {
     }
 
     async listById(id: string): Promise<Project> {
-        const project = await this.repository.findOneBy({ id: id });
+        const project = await this.repository.findOneBy({ id });
         return project;
+    }
+
+    async create(name: string): Promise<void> {
+        const project = this.repository.create({ name });
+        await this.repository.save(project);
     }
 }
 

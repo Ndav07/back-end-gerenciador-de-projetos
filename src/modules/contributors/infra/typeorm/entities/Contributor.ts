@@ -21,7 +21,7 @@ class Contributor {
     team: Team;
 
     @OneToMany(() => Task, task => task.cotributor, { nullable: true })
-    tasks: Task[];
+    tasks?: Task[];
 
     @CreateDateColumn({ type: "timestamp", default: "now()" })
     created_at: Date;
