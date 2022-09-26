@@ -28,6 +28,24 @@ class TasksRepository implements ITasksRepository {
     async delete(id: string): Promise<void> {
         await this.repository.createQueryBuilder("tasks").delete().where("id = :id", { id }).execute();
     }
+
+    async editStatusOfTask(id: string, status: string): Promise<void> {
+        await this.repository.createQueryBuilder("tasks").update().set({ status: status }).where("id = :id", { id }).execute();
+    }
+
+    async editTask(id: string, name: string, description: string): Promise<void> {
+        await this.repository.createQueryBuilder("tasks").update().set({ name: name, description: description }).where("id = :id", { id }).execute();
+    }
+
+    async editContributorOfTask(idTask: string, idContributor: string): Promise<void> {
+        const contributorUse = await this.connectionDataBase.getRepository('contributors').findOne({ where: {id: idContributor} });
+        await this.repository.createQueryBuilder("tasks").update().set({ contributor: contributorUse }).where("id = :id", { idTask }).execute();
+    }
+
+    async removeContrbutorOfTask(id: string): Promise<void> {
+        await this.repository.createQueryBuilder("tasks").update().set({ contributor: null }).where("id = :id", { id }).execute();
+        
+    }
 };
 
 export { TasksRepository };

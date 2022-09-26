@@ -31,6 +31,11 @@ class ProjectsRepository implements IProjectsRepository {
     async delete(id: string): Promise<void> {
         await this.repository.createQueryBuilder("projects").delete().where("id = :id", { id }).execute();
     }
+
+    async editProject(name: string, id: string): Promise<void> {
+        await this.repository.createQueryBuilder("projects").update().set({ name: name }).where("id = :id", { id }).execute();
+        
+    }
 }
 
 export { ProjectsRepository };

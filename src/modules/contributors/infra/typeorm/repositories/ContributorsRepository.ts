@@ -27,6 +27,10 @@ class ContributorsRepository implements IContributorsRepository {
     async delete(id: string): Promise<void> {
         await this.repository.createQueryBuilder("contributors").delete().where("id = :id", { id }).execute();
     }
+
+    async editContributor(id: string, name: string, office: string, avatar: string): Promise<void> {
+        await this.repository.createQueryBuilder("contributors").update().set({ name: name, office: office, avatar: avatar }).where("id = :id", { id }).execute();
+    }
 };
 
 export { ContributorsRepository };
