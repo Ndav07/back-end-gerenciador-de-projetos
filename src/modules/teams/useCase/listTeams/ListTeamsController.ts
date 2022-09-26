@@ -6,7 +6,7 @@ import { ListTeamsUseCase } from "./ListTeamsUseCase";
 class ListTeamsController {
     async handle(req: Request, res: Response): Promise<Response> {
         const listTeamsUseCase = container.resolve(ListTeamsUseCase);
-        const teams = listTeamsUseCase.execute();
+        const teams = await listTeamsUseCase.execute();
         return res.status(200).json(teams);
     }
 };

@@ -12,6 +12,9 @@ import { ContributorsRepository } from "@modules/contributors/infra/typeorm/repo
 import { ITeamsRepository } from "@modules/teams/repositories/ITeamsRepository";
 import { TeamsRepository } from "@modules/teams/infra/typeorm/repositories/TeamsRepository";
 
+import { ITasksRepository } from "@modules/tasks/repositories/ITasksRepository";
+import { TasksRepository } from "@modules/tasks/infra/typeorm/repositories/TasksRepository";
+
 container.registerSingleton<IUsersRepository>(
     "UsersRepository",
     UsersRepository
@@ -30,4 +33,9 @@ container.registerSingleton<IContributorsRepository>(
 container.registerSingleton<ITeamsRepository>(
     "TeamsRepository",
     TeamsRepository
-)
+);
+
+container.registerSingleton<ITasksRepository>(
+    "TasksRepository",
+    TasksRepository
+);

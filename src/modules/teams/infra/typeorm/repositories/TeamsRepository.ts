@@ -20,7 +20,7 @@ class TeamsRepository implements ITeamsRepository {
     };
 
     async list(): Promise<Team[]> {
-        const teams = this.repository.find();
+        const teams = await this.repository.find();
         return teams;
     }
 };

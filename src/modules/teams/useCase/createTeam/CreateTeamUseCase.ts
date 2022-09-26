@@ -7,7 +7,7 @@ import { Team } from "@modules/teams/infra/typeorm/entities/Team";
 class CreateTeamUseCase {
     constructor(@inject("TeamsRepository") private teamRepository: ITeamsRepository) {}
     async execute(name: string): Promise<Team> {
-        const team = this.teamRepository.create(name);
+        const team = await this.teamRepository.create(name);
         return team;
     };
 };

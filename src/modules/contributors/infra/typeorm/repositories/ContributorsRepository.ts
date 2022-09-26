@@ -19,8 +19,8 @@ class ContributorsRepository implements IContributorsRepository {
     }
 
     async create({ name, office, team }: CreateContributorDTO): Promise<void> {
-        const teamUser = await this.connectionDataBase.getRepository('teams').findOne({ where: {id: team} });
-        const contributor = this.repository.create({ name, office, team: teamUser });
+        const teamUse = await this.connectionDataBase.getRepository('teams').findOne({ where: {id: team} });
+        const contributor = this.repository.create({ name, office, team: teamUse });
         await this.repository.save(contributor);
     }
 };

@@ -5,7 +5,7 @@ import { IContributorsRepository } from "@modules/contributors/repositories/ICon
 
 @injectable()
 class ListContributorByIdTeamUseCase {
-    constructor(@inject("ContributorRepository") private contributorsRepository: IContributorsRepository) {}
+    constructor(@inject("ContributorsRepository") private contributorsRepository: IContributorsRepository) {}
     async execute(id: string): Promise<Contributor[]> {
         const contributors = await this.contributorsRepository.listByIdTeam(id);
         return contributors;

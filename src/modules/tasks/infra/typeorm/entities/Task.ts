@@ -21,7 +21,7 @@ class Task {
     project: Project;
     
     @ManyToOne(() => Contributor, contributor => contributor.tasks, { nullable: true })
-    cotributor: Contributor;
+    contributor?: Contributor;
 
     @CreateDateColumn({ type: "timestamp", default: "now()" })
     created_at: Date;
