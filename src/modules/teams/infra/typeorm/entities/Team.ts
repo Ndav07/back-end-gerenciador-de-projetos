@@ -13,7 +13,7 @@ class Team {
 
     @OneToOne(() => Project, { nullable: true, onDelete: "SET NULL" })
     @JoinColumn()
-    projeto?: Project;
+    project?: Project;
 
     @OneToMany(() => Contributor, contributors => contributors.team, { nullable: true })
     contributors?: Contributor[];

@@ -20,7 +20,7 @@ class Contributor {
     @ManyToOne(() => Team, team => team.contributors, { cascade: true })
     team: Team;
 
-    @OneToMany(() => Task, task => task.cotributor, { nullable: true })
+    @OneToMany(() => Task, task => task.contributor, { nullable: true })
     tasks?: Task[];
 
     @CreateDateColumn({ type: "timestamp", default: "now()" })

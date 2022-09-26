@@ -9,6 +9,7 @@ interface CreateContributorDTO {
 interface IContributorsRepository {
     listByIdTeam(id: string): Promise<Contributor[]>;
     create(date: CreateContributorDTO): Promise<void>;
+    delete(id: string): Promise<void>;
 };
 
 export { IContributorsRepository, CreateContributorDTO };

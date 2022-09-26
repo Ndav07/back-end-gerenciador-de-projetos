@@ -11,6 +11,7 @@ interface ICreateTaskDTO {
 interface ITasksRepository {
     listByIdProject(id: string): Promise<Task[]>;
     create(data: ICreateTaskDTO): Promise<void>;
+    delete(id: string): Promise<void>;
 };
 
 export { ITasksRepository, ICreateTaskDTO };

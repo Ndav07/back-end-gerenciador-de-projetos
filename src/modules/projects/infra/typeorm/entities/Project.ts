@@ -1,5 +1,5 @@
 import { v4 as uuidV4 } from "uuid";
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
 import { Task } from "../../../../tasks/infra/typeorm/entities/Task";
 
 @Entity('projects')

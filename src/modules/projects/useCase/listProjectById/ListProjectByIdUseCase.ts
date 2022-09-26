@@ -1,6 +1,7 @@
+import { inject, injectable } from "tsyringe";
+
 import { Project } from "@modules/projects/infra/typeorm/entities/Project";
 import { IProjectsRepository } from "@modules/projects/repositories/IProjectsRepository";
-import { inject, injectable } from "tsyringe";
 
 @injectable()
 class ListProjectByIdUseCase {

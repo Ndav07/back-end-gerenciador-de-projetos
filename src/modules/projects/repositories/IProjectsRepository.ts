@@ -4,6 +4,7 @@ interface IProjectsRepository {
     list(): Promise<Project[]>;
     listById(id: string): Promise<Project>;
     create(name: string): Promise<void>;
+    delete(id: string): Promise<void>;
 };
 
 export { IProjectsRepository };

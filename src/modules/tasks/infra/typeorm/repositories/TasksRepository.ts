@@ -24,6 +24,10 @@ class TasksRepository implements ITasksRepository {
         const task = this.repository.create({ name, description, status, project: projectUse, contributor: contributorUse });
         await this.repository.save(task);
     }
+
+    async delete(id: string): Promise<void> {
+        await this.repository.createQueryBuilder("tasks").delete().where("id = :id", { id }).execute();
+    }
 };
 
 export { TasksRepository };
