@@ -5,9 +5,12 @@ import { CreateContributorUseCase } from "./CreateContributorUseCase";
 
 class CreateContributorController {
     async handle(req: Request, res: Response): Promise<Response> {
-        const { name, office, team } = req.body;
+        const contributors = req.body;
         const createContributorUseCase = container.resolve(CreateContributorUseCase);
-        await createContributorUseCase.execute({ name, office, team });
+        for(let j in contributors){
+            const { name, office, team } = contributors[j];
+            await createContributorUseCase.execute({ name, office, team });
+        }
         return res.status(200).send();
     }
 };

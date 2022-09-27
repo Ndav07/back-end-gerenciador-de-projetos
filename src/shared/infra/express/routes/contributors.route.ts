@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 
-import { ListContributorByIdTeamController } from "@modules/contributors/useCase/listContributorsByIdTeam/ListContributorByIdTeamController";
+import { ListContributorByIdTeamController } from "@modules/contributors/useCase/ListContributorsByIdTeam/ListContributorByIdTeamController";
 import { CreateContributorController } from "@modules/contributors/useCase/createContributor/CreateContributorController";
 import { EditContributorController } from "@modules/contributors/useCase/editContributor/EditContributorController";
 import { DeleteContributorController } from "@modules/contributors/useCase/deleteContributor/DeleteContributorController";
