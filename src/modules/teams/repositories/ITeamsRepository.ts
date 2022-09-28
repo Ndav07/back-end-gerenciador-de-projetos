@@ -6,9 +6,7 @@ interface ITeamsRepository {
     listById(id: string): Promise<Team>;
     listTeamsWithoutProject(): Promise<Team[]>;
     delete(id: string): Promise<void>;
-    editProjectOfTeam(idProject: string, idTeam: string): Promise<void>;
     editTeam(id: string, name: string): Promise<void>;
-    removeProjectOfTeam(id: string): Promise<void>;
 };
 
 export { ITeamsRepository };

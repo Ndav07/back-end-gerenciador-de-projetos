@@ -14,7 +14,7 @@ const createContributorController = new CreateContributorController();
 const editContributorController = new EditContributorController();
 const deleteContributorController = new DeleteContributorController();
 
-contributorsRoutes.use(ensureAuthenticated);
+//contributorsRoutes.use(ensureAuthenticated);
 
 contributorsRoutes.get("/:id", listContributorByIdTeamController.handle);
 

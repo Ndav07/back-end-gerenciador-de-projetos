@@ -1,6 +1,7 @@
 import { v4 as uuidV4 } from "uuid";
-import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryColumn, JoinColumn } from "typeorm";
 import { Task } from "../../../../tasks/infra/typeorm/entities/Task";
+import { Team } from "../../../../teams/infra/typeorm/entities/Team";
 
 @Entity('projects')
 class Project {
@@ -10,7 +11,11 @@ class Project {
     @Column({ type: "varchar" })
     name: string;
 
-    @OneToMany(() => Task, tasks => tasks.project, { nullable: true })
+    @OneToOne(() => Team, { nullable: true, onDelete: "SET NULL" })
+    @JoinColumn()
+    team?: Team;
+
+    @OneToMany(() => Task, tasks => tasks.project, { nullable: true, cascade: true })
     tasks?: Task[];
 
     @CreateDateColumn({ type: "timestamp", default: "now()" })

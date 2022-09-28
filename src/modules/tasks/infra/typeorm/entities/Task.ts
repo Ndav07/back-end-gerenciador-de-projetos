@@ -17,10 +17,10 @@ class Task {
     @Column({ type: "varchar" })
     status: string;
 
-    @ManyToOne(() => Project, project => project.tasks, { cascade: true })
+    @ManyToOne(() => Project, project => project.tasks, { onDelete: 'CASCADE' })
     project: Project;
     
-    @ManyToOne(() => Contributor, contributor => contributor.tasks, { nullable: true })
+    @ManyToOne(() => Contributor, contributor => contributor.tasks, { nullable: true, onDelete: 'SET NULL' })
     contributor?: Contributor;
 
     @CreateDateColumn({ type: "timestamp", default: "now()" })

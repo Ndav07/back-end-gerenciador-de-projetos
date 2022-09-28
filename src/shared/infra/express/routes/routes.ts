@@ -10,7 +10,7 @@ import { tasksRoutes } from "./tasks.route";
 
 const router = Router();
 
-router.use(authenticateRoutes);
+//router.use(authenticateRoutes);
 
 router.use("/users", usersRouter);
 router.use("/projects", projectsRoutes);

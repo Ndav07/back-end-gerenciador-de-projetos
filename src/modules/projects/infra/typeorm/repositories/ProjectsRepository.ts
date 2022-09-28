@@ -14,7 +14,7 @@ class ProjectsRepository implements IProjectsRepository {
     };
 
     async list(): Promise<Project[]> {
-        const projects = await this.repository.find();
+        const projects = await this.repository.createQueryBuilder("projects").leftJoinAndSelect("projects.team", "team").leftJoinAndSelect("projects.tasks", "task").leftJoinAndSelect("task.contributor", "contributor").getMany();
         return projects;
     }
 
@@ -35,6 +35,15 @@ class ProjectsRepository implements IProjectsRepository {
     async editProject(name: string, id: string): Promise<void> {
         await this.repository.createQueryBuilder("projects").update().set({ name: name }).where("id = :id", { id }).execute();
         
+    }
+
+    async editTeamOfProject(idProject: string, idTeam: string): Promise<void> {
+        const teamUse = await this.connectionDataBase.getRepository("teams").findOne({ where: {id: idTeam} });
+        await this.repository.createQueryBuilder("projects").update().set({ team: teamUse }).where("id = :id", { idProject }).execute();
+    }
+
+    async removeTeamOfProject(id: string): Promise<void> {
+        await this.repository.createQueryBuilder("projects").update().set({ team: null }).where("id = :id", { id }).execute();
     }
 }
 

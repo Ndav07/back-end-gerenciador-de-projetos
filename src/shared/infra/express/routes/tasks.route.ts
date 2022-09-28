@@ -20,7 +20,7 @@ const editContributorOfTaskController = new EditContributorOfTaskController();
 const removeContributorOfTaskController = new RemoveContributorOfTaskController();
 const deleteTaskController = new DeleteTaskController();
 
-tasksRoutes.use(ensureAuthenticated);
+//tasksRoutes.use(ensureAuthenticated);
 
 tasksRoutes.get("/:id", listTaskByIdProjectController.handle);
 

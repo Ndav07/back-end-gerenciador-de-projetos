@@ -17,10 +17,10 @@ class Contributor {
     @Column({ type: "varchar", nullable: true })
     avatar?: string;
 
-    @ManyToOne(() => Team, team => team.contributors, { cascade: true })
+    @ManyToOne(() => Team, team => team.contributors, { onDelete: 'CASCADE' })
     team: Team;
 
-    @OneToMany(() => Task, task => task.contributor, { nullable: true })
+    @OneToMany(() => Task, task => task.contributor, { nullable: true, onDelete: 'SET NULL' })
     tasks?: Task[];
 
     @CreateDateColumn({ type: "timestamp", default: "now()" })

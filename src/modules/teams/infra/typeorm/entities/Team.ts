@@ -11,11 +11,7 @@ class Team {
     @Column({ type: "varchar" })
     name: string;
 
-    @OneToOne(() => Project, { nullable: true, onDelete: "SET NULL" })
-    @JoinColumn()
-    project?: Project;
-
-    @OneToMany(() => Contributor, contributors => contributors.team, { nullable: true })
+    @OneToMany(() => Contributor, contributors => contributors.team, { nullable: true, cascade: true })
     contributors?: Contributor[];
 
     @CreateDateColumn({ type: "timestamp", default: "now()" })

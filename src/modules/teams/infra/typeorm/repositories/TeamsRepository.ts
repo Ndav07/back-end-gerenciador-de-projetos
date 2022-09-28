@@ -38,17 +38,8 @@ class TeamsRepository implements ITeamsRepository {
         await this.repository.createQueryBuilder("teams").delete().where("id = :id", { id }).execute();
     }
 
-    async editProjectOfTeam(idProject: string, idTeam: string): Promise<void> {
-        const projectUse = await this.connectionDataBase.getRepository("projects").findOne({ where: {id: idProject} });
-        await this.repository.createQueryBuilder("teams").update().set({ project: projectUse }).where("id = :id", { idTeam }).execute();
-    }
-
     async editTeam(id: string, name: string): Promise<void> {
         await this.repository.createQueryBuilder("teams").update().set({ name: name }).where("id = :id", { id }).execute();
-    }
-
-    async removeProjectOfTeam(id: string): Promise<void> {
-        await this.repository.createQueryBuilder("teams").update().set({ project: null }).where("id = :id", { id }).execute();
     }
 };
 
