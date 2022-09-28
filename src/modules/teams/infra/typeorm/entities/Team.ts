@@ -1,5 +1,5 @@
 import { v4 as uuidV4 } from "uuid";
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
 import { Contributor } from "../../../../contributors/infra/typeorm/entities/Contributor";
 import { Project } from "../../../../projects/infra/typeorm/entities/Project";
 
@@ -10,6 +10,9 @@ class Team {
 
     @Column({ type: "varchar" })
     name: string;
+
+    @OneToOne(() => Project, project => project.team)
+    project: Project;
 
     @OneToMany(() => Contributor, contributors => contributors.team, { nullable: true, cascade: true })
     contributors?: Contributor[];
