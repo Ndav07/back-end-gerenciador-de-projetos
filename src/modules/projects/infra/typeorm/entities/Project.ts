@@ -11,11 +11,11 @@ class Project {
     @Column({ type: "varchar" })
     name: string;
 
-    @OneToOne(() => Team, { nullable: true, onDelete: "SET NULL" })
+    @OneToOne(() => Team, { nullable: true, onDelete: "SET NULL", cascade: true })
     @JoinColumn()
     team?: Team;
 
-    @OneToMany(() => Task, tasks => tasks.project, { nullable: true, cascade: true })
+    @OneToMany(() => Task, tasks => tasks.project, { nullable: true })
     tasks?: Task[];
 
     @CreateDateColumn({ type: "timestamp", default: "now()" })

@@ -14,7 +14,7 @@ class Team {
     @OneToOne(() => Project, project => project.team)
     project: Project;
 
-    @OneToMany(() => Contributor, contributors => contributors.team, { nullable: true, cascade: true })
+    @OneToMany(() => Contributor, contributors => contributors.team, { nullable: true })
     contributors?: Contributor[];
 
     @CreateDateColumn({ type: "timestamp", default: "now()" })

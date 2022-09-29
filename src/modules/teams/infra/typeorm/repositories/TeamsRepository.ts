@@ -20,7 +20,7 @@ class TeamsRepository implements ITeamsRepository {
     };
 
     async list(): Promise<Team[]> {
-        const teams = await this.repository.find();
+        const teams = await this.repository.createQueryBuilder("teams").leftJoinAndSelect("teams.project", "project").getMany();
         return teams;
     }
 
@@ -30,7 +30,7 @@ class TeamsRepository implements ITeamsRepository {
     }
 
     async listTeamsWithoutProject(): Promise<Team[]> {
-        const teams = await this.repository.createQueryBuilder("teams").leftJoinAndSelect("teams.project", "project").where("teams.project IS NULL").getMany();
+        const teams = await this.repository.createQueryBuilder("teams").leftJoinAndSelect("teams.project", "project").where("project IS NULL").getMany();
         return teams;
     }
 

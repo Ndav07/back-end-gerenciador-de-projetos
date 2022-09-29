@@ -5,9 +5,9 @@ import { EditTaskUseCase } from "./EditTaskUseCase";
 
 class EditTaskController {
     async handle(req: Request, res: Response): Promise<Response> {
-        const { id, name, description } = req.body;
+        const { id, name, description, contributor } = req.body;
         const editTaskUseCase = container.resolve(EditTaskUseCase);
-        await editTaskUseCase.execute(id, name, description);
+        await editTaskUseCase.execute({ id, name, description, contributor });
         return res.status(200).send();
     }
 };

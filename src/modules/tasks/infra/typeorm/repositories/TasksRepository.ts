@@ -2,7 +2,7 @@ import { DataSource, Repository } from "typeorm";
 
 import { PostgresConnectDataBase } from "@shared/infra/typeorm/data-source";
 import { Task } from "@modules/tasks/infra/typeorm/entities/Task";
-import { ITasksRepository, ICreateTaskDTO } from "@modules/tasks/repositories/ITasksRepository";
+import { ITasksRepository, ICreateTaskDTO, IEditTaskDTO } from "@modules/tasks/repositories/ITasksRepository";
 
 class TasksRepository implements ITasksRepository {
     private connectionDataBase: DataSource;
@@ -33,8 +33,9 @@ class TasksRepository implements ITasksRepository {
         await this.repository.createQueryBuilder("tasks").update().set({ status: status }).where("id = :id", { id }).execute();
     }
 
-    async editTask(id: string, name: string, description: string): Promise<void> {
-        await this.repository.createQueryBuilder("tasks").update().set({ name: name, description: description }).where("id = :id", { id }).execute();
+    async editTask({ id, name, description, contributor }:IEditTaskDTO): Promise<void> {
+        const contributorUse = await this.connectionDataBase.getRepository('contributors').findOne({ where: {id: contributor} });
+        await this.repository.createQueryBuilder("tasks").update().set({ name: name, description: description, contributor: contributorUse }).where("id = :id", { id }).execute();
     }
 
     async editContributorOfTask(idTask: string, idContributor: string): Promise<void> {

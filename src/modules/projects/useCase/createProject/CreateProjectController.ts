@@ -5,9 +5,9 @@ import { CreateProjectUseCase } from "./CreateProjectUseCase";
 
 class CreateProjectController {
     async handle(req: Request, res: Response): Promise<Response> {
-        const { name } = req.body;
+        const { name, idTeam } = req.body;
         const createProjectUseCase = container.resolve(CreateProjectUseCase);
-        createProjectUseCase.execute(name);
+        createProjectUseCase.execute(name, idTeam);
         return res.status(200).send();
     }
 };
