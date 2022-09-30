@@ -27,7 +27,7 @@ projectsRoutes.get("/:id", listProjectByIdCrontroller.handle);
 
 projectsRoutes.post("/", createProjectCrontroller.handle);
 
-projectsRoutes.patch("/", editProjectController.handle);
+projectsRoutes.put("/", editProjectController.handle);
 projectsRoutes.patch("/editTeam", editTeamOfProjectController.handle);
 projectsRoutes.patch("/removeTeam", removeTeamOfProjectController.handle);
 
