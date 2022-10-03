@@ -18,7 +18,7 @@ const createTeamController = new CreateTeamController();
 const editTeamController = new EditTeamController();
 const deleteTeamController = new DeleteTeamController();
 
-//teamsRoutes.use(ensureAuthenticated);
+teamsRoutes.use(ensureAuthenticated);
 
 teamsRoutes.get("/", listTeamsController.handle);
 teamsRoutes.get("/:id", listTeamByIdController.handle);

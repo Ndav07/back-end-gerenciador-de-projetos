@@ -20,7 +20,7 @@ const editTeamOfProjectController = new EditTeamOfProjectController();
 const removeTeamOfProjectController = new RemoveTeamOfProjectController();
 const deleteProjectController = new DeleteProjectController();
 
-//projectsRoutes.use(ensureAuthenticated);
+projectsRoutes.use(ensureAuthenticated);
 
 projectsRoutes.get("/", listProjectsCrontroller.handle);
 projectsRoutes.get("/:id", listProjectByIdCrontroller.handle);
