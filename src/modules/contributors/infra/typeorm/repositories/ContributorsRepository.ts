@@ -2,7 +2,7 @@ import { DataSource, Repository } from "typeorm";
 
 import { Contributor } from "../entities/Contributor";
 import { PostgresConnectDataBase } from "@shared/infra/typeorm/data-source";
-import { IContributorsRepository, CreateContributorDTO } from "@modules/contributors/repositories/IContributorsRepository";
+import { IContributorsRepository, CreateContributorDTO, EditContributorDTO } from "@modules/contributors/repositories/IContributorsRepository";
 
 class ContributorsRepository implements IContributorsRepository {
     private connectionDataBase: DataSource;
@@ -12,6 +12,11 @@ class ContributorsRepository implements IContributorsRepository {
         this.connectionDataBase = PostgresConnectDataBase;
         this.repository = this.connectionDataBase.getRepository(Contributor);
     };
+
+    async listById(id: string): Promise<Contributor> {
+        const contributor = await this.repository.findOne({ where: {id: id} });
+        return contributor;
+    }
 
     async listByIdTeam(id: string): Promise<Contributor[]> {
         const contributors = await this.repository.createQueryBuilder("contributors").where("contributors.team = :id", { id }).getMany();
@@ -28,7 +33,10 @@ class ContributorsRepository implements IContributorsRepository {
         await this.repository.createQueryBuilder("contributors").delete().where("id = :id", { id }).execute();
     }
 
-    async editContributor(id: string, name: string, office: string, avatar: string): Promise<void> {
+    async editContributor({ id, name, office, avatar }: EditContributorDTO): Promise<void> {
+        if(avatar === null) {
+            await this.repository.createQueryBuilder("contributors").update().set({ name: name, office: office }).where("id = :id", { id }).execute();
+        }
         await this.repository.createQueryBuilder("contributors").update().set({ name: name, office: office, avatar: avatar }).where("id = :id", { id }).execute();
     }
 };
