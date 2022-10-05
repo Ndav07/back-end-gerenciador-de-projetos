@@ -34,10 +34,11 @@ class ContributorsRepository implements IContributorsRepository {
     }
 
     async editContributor({ id, name, office, avatar }: EditContributorDTO): Promise<void> {
-        if(avatar === null) {
-            await this.repository.createQueryBuilder("contributors").update().set({ name: name, office: office }).where("id = :id", { id }).execute();
-        }
         await this.repository.createQueryBuilder("contributors").update().set({ name: name, office: office, avatar: avatar }).where("id = :id", { id }).execute();
+    }
+
+    async editContributorWithoutAvatar({ id, name, office }: EditContributorDTO): Promise<void> {
+        await this.repository.createQueryBuilder("contributors").update().set({ name: name, office: office }).where("id = :id", { id }).execute();
     }
 };
 

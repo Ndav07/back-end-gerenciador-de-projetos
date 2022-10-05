@@ -10,7 +10,7 @@ interface EditContributorDTO {
     id: string;
     name: string;
     office: string; 
-    avatar: string;
+    avatar?: string;
 }
 
 interface IContributorsRepository {
@@ -19,6 +19,7 @@ interface IContributorsRepository {
     create(data: CreateContributorDTO): Promise<void>;
     delete(id: string): Promise<void>;
     editContributor(data: EditContributorDTO): Promise<void>;
+    editContributorWithoutAvatar(data: EditContributorDTO): Promise<void>;
 };
 
 export { IContributorsRepository, CreateContributorDTO, EditContributorDTO };
