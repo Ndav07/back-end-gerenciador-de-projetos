@@ -8,7 +8,7 @@
     ],
     "routes": [
         {
-            "src": "/shared/infra/express/routes/",
+            "src": "/(.*)",
             "dest": "routes.ts"
         }
     ]
