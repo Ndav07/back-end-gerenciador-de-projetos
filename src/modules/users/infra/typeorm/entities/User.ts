@@ -14,7 +14,7 @@ class User {
     password: string;
 
     @CreateDateColumn({ type: "timestamp", nullable: true, default: "now()" })
-    created_at: Date;
+    created_at?: Date;
 
     constructor(){
         if(!this.id) {

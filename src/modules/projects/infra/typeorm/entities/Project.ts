@@ -19,7 +19,7 @@ class Project {
     tasks?: Task[];
 
     @CreateDateColumn({ type: "timestamp", default: "now()" })
-    created_at: Date;
+    created_at?: Date;
 
     constructor(){
         if(!this.id) {

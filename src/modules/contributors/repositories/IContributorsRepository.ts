@@ -1,16 +1,17 @@
 import { Contributor } from "../infra/typeorm/entities/Contributor";
+import { Team } from "@modules/teams/infra/typeorm/entities/Team";
 
 interface ICreateContributorDTO {
     name: string;
     office: string;
-    team: string;
+    team: Team;
 }
 
 interface IEditContributorDTO {
     id: string;
     name: string;
     office: string; 
-    avatar: string;
+    avatar?: string;
 }
 
 interface IContributorsRepository {

@@ -1,7 +1,6 @@
 import { Contributor } from "@modules/contributors/infra/typeorm/entities/Contributor";
 import { ICreateContributorDTO, IEditContributorDTO, IContributorsRepository } from "../IContributorsRepository";
 
-
 class InMemoryContributorsRepository implements IContributorsRepository {
     contributors: Contributor[] = [];
 
@@ -35,8 +34,13 @@ class InMemoryContributorsRepository implements IContributorsRepository {
         });
     }
 
-    editContributorWithoutAvatar(data: IEditContributorDTO): Promise<void> {
-        throw new Error("Method not implemented.");
+    async editContributorWithoutAvatar({ id, name, office }: IEditContributorDTO): Promise<void> {
+        this.contributors.map((contributors) => {
+            if(contributors.id === id) {
+                contributors.name = name;
+                contributors.office = office;
+            }
+        });
     }
 };
 

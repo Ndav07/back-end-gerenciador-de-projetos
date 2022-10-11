@@ -7,7 +7,7 @@ interface IRequest {
     id: string;
     name: string;
     office: string; 
-    avatar: string;
+    avatar?: string;
 }
 
 @injectable()

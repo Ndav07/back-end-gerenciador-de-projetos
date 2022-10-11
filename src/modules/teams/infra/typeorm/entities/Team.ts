@@ -12,13 +12,13 @@ class Team {
     name: string;
 
     @OneToOne(() => Project, project => project.team)
-    project: Project;
+    project?: Project;
 
     @OneToMany(() => Contributor, contributors => contributors.team, { nullable: true })
     contributors?: Contributor[];
 
     @CreateDateColumn({ type: "timestamp", default: "now()" })
-    created_at: Date;
+    created_at?: Date;
 
     constructor(){
         if(!this.id) {

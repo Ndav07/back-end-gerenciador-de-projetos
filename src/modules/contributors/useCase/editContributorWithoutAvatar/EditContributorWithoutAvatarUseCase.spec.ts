@@ -1,23 +1,20 @@
 import { InMemoryContributorsRepository } from "@modules/contributors/repositories/in-memory/inMemoryContributorsRepository";
-import { EditContributorUseCase } from "./EditContributorUseCase";
+import { EditContributorWithoutAvatarUseCase } from "./EditContributorWithoutAvatarUseCase";
 import { ICreateContributorDTO, IEditContributorDTO } from "@modules/contributors/repositories/IContributorsRepository";
 
 describe("Edit colaborador", () => {
     let inMemoryContributorsRepository: InMemoryContributorsRepository;
-    let editContributorUseCase: EditContributorUseCase;
+    let editContributorWithoutAvatarUseCase: EditContributorWithoutAvatarUseCase;
     let contributor: ICreateContributorDTO;
     let contributorEdit: IEditContributorDTO;
 
     beforeEach(() => {
         inMemoryContributorsRepository = new InMemoryContributorsRepository();
-        editContributorUseCase = new EditContributorUseCase(inMemoryContributorsRepository);
+        editContributorWithoutAvatarUseCase = new EditContributorWithoutAvatarUseCase(inMemoryContributorsRepository);
         contributor = {
             name: "Contributor name",
             office: "Contributor office",
-            team: {
-                id: "12323",
-                name: "equipe",
-            }
+            team: "12323"
         };
     });
 
@@ -26,20 +23,16 @@ describe("Edit colaborador", () => {
         contributorEdit = {
             id: inMemoryContributorsRepository.contributors[0].id,
             name: "Update contributor name",
-            office: "Update contributor office",
-            avatar: "Avatar contributor"
+            office: "Update contributor office"
         };
         const contributorVerification = {
             id: inMemoryContributorsRepository.contributors[0].id,
             name: "Update contributor name",
             office: "Update contributor office",
-            avatar: "Avatar contributor",
-            team: {
-                id: "12323",
-                name: "equipe",
-            }
+            team: "12323"
         };
-        await editContributorUseCase.execute(contributorEdit);
+        await editContributorWithoutAvatarUseCase.execute(contributorEdit);
         expect(inMemoryContributorsRepository.contributors[0]).toEqual(contributorVerification);
     })
+    
 });
