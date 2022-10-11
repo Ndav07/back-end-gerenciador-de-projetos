@@ -8,7 +8,7 @@ class CreateProjectController {
         const { name, team } = req.body;
         const createProjectUseCase = container.resolve(CreateProjectUseCase);
         createProjectUseCase.execute(name, team);
-        return res.status(200).send();
+        return res.status(201).send();
     }
 };
 

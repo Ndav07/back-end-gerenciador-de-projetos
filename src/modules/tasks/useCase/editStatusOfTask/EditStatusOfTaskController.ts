@@ -8,7 +8,7 @@ class EditStatusOfTaskController {
         const { id, status } = req.body;
         const editStatusOfTaskUseCase = container.resolve(EditStatusOfTaskUseCase);
         await editStatusOfTaskUseCase.execute(id, status);
-        return res.status(200).send();
+        return res.status(201).send();
     }
 };
 

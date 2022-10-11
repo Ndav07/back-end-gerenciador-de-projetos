@@ -8,7 +8,7 @@ class CreateTeamController {
         const { name } = req.body;
         const createTeamUseCase = container.resolve(CreateTeamUseCase);
         const teamId = await createTeamUseCase.execute(name);
-        return res.status(200).json(teamId);
+        return res.status(201).json(teamId);
     };
 };
 

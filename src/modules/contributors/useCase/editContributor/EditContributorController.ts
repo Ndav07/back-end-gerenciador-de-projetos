@@ -8,8 +8,8 @@ class EditContributorController {
         const { id, name, office } = req.body;
         const avatar = req.file.filename;
         const editContributorUseCase = container.resolve(EditContributorUseCase);
-        await editContributorUseCase.execute(id, name, office, avatar);
-        return res.status(200).send();
+        await editContributorUseCase.execute({id, name, office, avatar});
+        return res.status(201).send();
     }
 };
 

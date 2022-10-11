@@ -8,7 +8,7 @@ class CreateTaskController {
         const { name, description, status, project, contributor } = req.body;
         const createTaskUseCase = container.resolve(CreateTaskUseCase);
         await createTaskUseCase.execute({ name, description, status, project, contributor });
-        return res.status(200).send();
+        return res.status(201).send();
     }
 };
 

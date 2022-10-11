@@ -11,7 +11,7 @@ class CreateContributorController {
             const { name, office, team } = contributors[j];
             await createContributorUseCase.execute({ name, office, team });
         }
-        return res.status(200).send();
+        return res.status(201).send();
     }
 };
 

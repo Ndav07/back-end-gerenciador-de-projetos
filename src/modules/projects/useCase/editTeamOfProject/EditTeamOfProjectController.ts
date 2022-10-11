@@ -8,7 +8,7 @@ class EditTeamOfProjectController {
         const { idProject, idTeam } = req.body;
         const editTeamOfProjectUseCase = container.resolve(EditTeamOfProjectUseCase);
         await editTeamOfProjectUseCase.execute(idProject, idTeam);
-        return res.status(200).send();
+        return res.status(201).send();
     }
 };
 

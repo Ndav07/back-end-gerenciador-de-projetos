@@ -2,7 +2,7 @@ import { DataSource, Repository } from "typeorm";
 
 import { Contributor } from "../entities/Contributor";
 import { PostgresConnectDataBase } from "@shared/infra/typeorm/data-source";
-import { IContributorsRepository, CreateContributorDTO, EditContributorDTO } from "@modules/contributors/repositories/IContributorsRepository";
+import { IContributorsRepository, ICreateContributorDTO, IEditContributorDTO } from "@modules/contributors/repositories/IContributorsRepository";
 
 class ContributorsRepository implements IContributorsRepository {
     private connectionDataBase: DataSource;
@@ -23,7 +23,7 @@ class ContributorsRepository implements IContributorsRepository {
         return contributors;
     }
 
-    async create({ name, office, team }: CreateContributorDTO): Promise<void> {
+    async create({ name, office, team }: ICreateContributorDTO): Promise<void> {
         const teamUse = await this.connectionDataBase.getRepository("teams").findOne({ where: {id: team} });
         const contributor = this.repository.create({ name, office, team: teamUse });
         await this.repository.save(contributor);
@@ -33,11 +33,11 @@ class ContributorsRepository implements IContributorsRepository {
         await this.repository.createQueryBuilder("contributors").delete().where("id = :id", { id }).execute();
     }
 
-    async editContributor({ id, name, office, avatar }: EditContributorDTO): Promise<void> {
+    async editContributor({ id, name, office, avatar }: IEditContributorDTO): Promise<void> {
         await this.repository.createQueryBuilder("contributors").update().set({ name: name, office: office, avatar: avatar }).where("id = :id", { id }).execute();
     }
 
-    async editContributorWithoutAvatar({ id, name, office }: EditContributorDTO): Promise<void> {
+    async editContributorWithoutAvatar({ id, name, office }: IEditContributorDTO): Promise<void> {
         await this.repository.createQueryBuilder("contributors").update().set({ name: name, office: office }).where("id = :id", { id }).execute();
     }
 };

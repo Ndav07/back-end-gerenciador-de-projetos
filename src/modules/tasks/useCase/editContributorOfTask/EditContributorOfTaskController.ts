@@ -8,7 +8,7 @@ class EditContributorOfTaskController {
         const { idTask, idContributor } = req.body;
         const editContributorOfTaskUseCase = container.resolve(EditContributorOfTaskUseCase);
         await editContributorOfTaskUseCase.execute(idTask, idContributor);
-        return res.status(200).send();
+        return res.status(201).send();
     }
 };
 

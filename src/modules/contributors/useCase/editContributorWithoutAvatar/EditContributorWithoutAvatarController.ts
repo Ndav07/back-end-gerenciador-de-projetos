@@ -9,7 +9,7 @@ class EditContributorWithoutAvatarController {
         const { id, name, office } = req.body;
         const editContributorWithoutAvatarUseCase = container.resolve(EditContributorWithoutAvatarUseCase);
         await editContributorWithoutAvatarUseCase.execute(id, name, office);
-        return res.status(200).send();
+        return res.status(201).send();
     }
 };
 

@@ -8,7 +8,7 @@ class EditProjectController {
         const { name, id, team } = req.body;
         const editProjectUseCase = container.resolve(EditProjectUseCase);
         editProjectUseCase.execute(name, id, team);
-        return res.status(200).send();
+        return res.status(201).send();
     }
 };
 
