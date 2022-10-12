@@ -1,7 +1,7 @@
 import { DataSource, Repository } from "typeorm";
 
-import { Contributor } from "../entities/Contributor";
 import { PostgresConnectDataBase } from "@shared/infra/typeorm/data-source";
+import { Contributor } from "../entities/Contributor";
 import { IContributorsRepository, ICreateContributorDTO, IEditContributorDTO } from "@modules/contributors/repositories/IContributorsRepository";
 
 class ContributorsRepository implements IContributorsRepository {

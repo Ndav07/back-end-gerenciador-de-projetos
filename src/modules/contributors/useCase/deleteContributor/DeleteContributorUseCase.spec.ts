@@ -13,7 +13,10 @@ describe("Delete contributor", () => {
         contributor = {
             name: "Contributor name",
             office: "Contributor office",
-            team: "12323"
+            team: {
+                id: "12323",
+                name: "equipe"
+            }
         };
     });
 

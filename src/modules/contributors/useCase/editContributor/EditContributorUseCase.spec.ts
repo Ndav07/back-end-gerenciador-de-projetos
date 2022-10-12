@@ -2,7 +2,7 @@ import { InMemoryContributorsRepository } from "@modules/contributors/repositori
 import { EditContributorUseCase } from "./EditContributorUseCase";
 import { ICreateContributorDTO, IEditContributorDTO } from "@modules/contributors/repositories/IContributorsRepository";
 
-describe("Edit colaborador", () => {
+describe("Edit contributor", () => {
     let inMemoryContributorsRepository: InMemoryContributorsRepository;
     let editContributorUseCase: EditContributorUseCase;
     let contributor: ICreateContributorDTO;

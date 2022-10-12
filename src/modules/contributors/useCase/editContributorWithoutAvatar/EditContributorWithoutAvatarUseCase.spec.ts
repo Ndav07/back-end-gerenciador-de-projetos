@@ -2,7 +2,7 @@ import { InMemoryContributorsRepository } from "@modules/contributors/repositori
 import { EditContributorWithoutAvatarUseCase } from "./EditContributorWithoutAvatarUseCase";
 import { ICreateContributorDTO, IEditContributorDTO } from "@modules/contributors/repositories/IContributorsRepository";
 
-describe("Edit colaborador", () => {
+describe("Edit contributor without avatar", () => {
     let inMemoryContributorsRepository: InMemoryContributorsRepository;
     let editContributorWithoutAvatarUseCase: EditContributorWithoutAvatarUseCase;
     let contributor: ICreateContributorDTO;
@@ -14,7 +14,10 @@ describe("Edit colaborador", () => {
         contributor = {
             name: "Contributor name",
             office: "Contributor office",
-            team: "12323"
+            team: {
+                id: "12323",
+                name: "equipe"
+            }
         };
     });
 
@@ -29,7 +32,10 @@ describe("Edit colaborador", () => {
             id: inMemoryContributorsRepository.contributors[0].id,
             name: "Update contributor name",
             office: "Update contributor office",
-            team: "12323"
+            team: {
+                id: "12323",
+                name: "equipe"
+            }
         };
         await editContributorWithoutAvatarUseCase.execute(contributorEdit);
         expect(inMemoryContributorsRepository.contributors[0]).toEqual(contributorVerification);

@@ -2,7 +2,7 @@ import { DataSource, Repository } from "typeorm";
 
 import { PostgresConnectDataBase } from "@shared/infra/typeorm/data-source";
 import { Project } from "@modules/projects/infra/typeorm/entities/Project";
-import { IProjectsRepository } from "@modules/projects/repositories/IProjectsRepository";
+import { ICreateProjectDTO, IEditProjectDTO, IProjectsRepository } from "@modules/projects/repositories/IProjectsRepository";
 
 class ProjectsRepository implements IProjectsRepository {
     private connectionDataBase: DataSource;
@@ -23,10 +23,9 @@ class ProjectsRepository implements IProjectsRepository {
         return project;
     }
 
-    async create(name: string, team: string): Promise<void> {
-        if(team){
-            const teamUse = await this.connectionDataBase.getRepository("teams").findOne({ where: {id: team} });
-            const project = this.repository.create({ name: name, team: teamUse });
+    async create({ name, team }: ICreateProjectDTO): Promise<void> {
+        if(team) {
+            const project = this.repository.create({ name: name, team: team });
             await this.repository.save(project);
         } else {
             const project = this.repository.create({ name: name });
@@ -38,23 +37,12 @@ class ProjectsRepository implements IProjectsRepository {
         await this.repository.createQueryBuilder("projects").delete().where("id = :id", { id }).execute();
     }
 
-    async editProject(name: string, id: string, team: string): Promise<void> {
-        if(team){
-            const teamUse = await this.connectionDataBase.getRepository("teams").findOne({ where: {id: team} });
-            await this.repository.createQueryBuilder("projects").update().set({ name: name, team: teamUse }).where("id = :id", { id }).execute();
+    async editProject({ name, id, team }: IEditProjectDTO): Promise<void> {
+        if(team) {
+            await this.repository.createQueryBuilder("projects").update().set({ name: name, team: team }).where("id = :id", { id }).execute();
         } else {
             await this.repository.createQueryBuilder("projects").update().set({ name: name, team: null }).where("id = :id", { id }).execute();
-
         } 
-    }
-
-    async editTeamOfProject(idProject: string, idTeam: string): Promise<void> {
-        const teamUse = await this.connectionDataBase.getRepository("teams").findOne({ where: {id: idTeam} });
-        await this.repository.createQueryBuilder("projects").update().set({ team: teamUse }).where("id = :id", { idProject }).execute();
-    }
-
-    async removeTeamOfProject(id: string): Promise<void> {
-        await this.repository.createQueryBuilder("projects").update().set({ team: null }).where("id = :id", { id }).execute();
     }
 }
 
