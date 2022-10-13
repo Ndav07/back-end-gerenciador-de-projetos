@@ -14,7 +14,7 @@ class ProjectsRepository implements IProjectsRepository {
     };
 
     async list(): Promise<Project[]> {
-        const projects = await this.repository.createQueryBuilder("projects").leftJoinAndSelect("projects.team", "team").leftJoinAndSelect("team.contributors", "contributors").leftJoinAndSelect("projects.tasks", "tasks").leftJoinAndSelect("tasks.contributor", "contributor").getMany();
+        const projects = await this.repository.createQueryBuilder("projects").orderBy("projects.created_at").leftJoinAndSelect("projects.team", "team").leftJoinAndSelect("team.contributors", "contributors").leftJoinAndSelect("projects.tasks", "tasks").leftJoinAndSelect("tasks.contributor", "contributor").getMany();
         return projects;
     }
 

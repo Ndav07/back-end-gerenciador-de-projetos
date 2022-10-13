@@ -19,7 +19,7 @@ class ContributorsRepository implements IContributorsRepository {
     }
 
     async listByIdTeam(id: string): Promise<Contributor[]> {
-        const contributors = await this.repository.createQueryBuilder("contributors").where("contributors.team = :id", { id }).getMany();
+        const contributors = await this.repository.createQueryBuilder("contributors").orderBy("contributors.created_at").where("contributors.team = :id", { id }).getMany();
         return contributors;
     }
 

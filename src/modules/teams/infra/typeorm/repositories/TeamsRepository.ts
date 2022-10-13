@@ -20,7 +20,7 @@ class TeamsRepository implements ITeamsRepository {
     };
 
     async list(): Promise<Team[]> {
-        const teams = await this.repository.createQueryBuilder("teams").leftJoinAndSelect("teams.project", "project").leftJoinAndSelect("teams.contributors", "contributors").getMany();
+        const teams = await this.repository.createQueryBuilder("teams").orderBy("teams.created_at").leftJoinAndSelect("teams.project", "project").leftJoinAndSelect("teams.contributors", "contributors").getMany();
         return teams;
     }
 

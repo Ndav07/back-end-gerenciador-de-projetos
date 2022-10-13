@@ -35,6 +35,14 @@ describe("List contributors by id team", () => {
                     id: "12323",
                     name: "equipe",
                 }
+            },
+            {
+                name: "Contributor name four",
+                office: "Contributor office four",
+                team: {
+                    id: "7777",
+                    name: "equipe",
+                }
             }
         ]
     })

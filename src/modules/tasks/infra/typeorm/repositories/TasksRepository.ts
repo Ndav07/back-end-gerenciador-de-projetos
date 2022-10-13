@@ -14,14 +14,12 @@ class TasksRepository implements ITasksRepository {
     }
 
     async listByIdProject(id: string): Promise<Task[]> {
-        const tasks = await this.repository.createQueryBuilder("tasks").where("tasks.project = :id", { id }).getMany();
+        const tasks = await this.repository.createQueryBuilder("tasks").orderBy("tasks.created_at").where("tasks.project = :id", { id }).getMany();
         return tasks;
     }
 
     async create({ name, description, status, project, contributor }: ICreateTaskDTO): Promise<void> {
-        const projectUse = await this.connectionDataBase.getRepository('projects').findOne({ where: {id: project} });
-        const contributorUse = await this.connectionDataBase.getRepository('contributors').findOne({ where: {id: contributor} });
-        const task = this.repository.create({ name, description, status, project: projectUse, contributor: contributorUse });
+        const task = this.repository.create({ name, description, status, project, contributor });
         await this.repository.save(task);
     }
 
@@ -29,23 +27,16 @@ class TasksRepository implements ITasksRepository {
         await this.repository.createQueryBuilder("tasks").delete().where("id = :id", { id }).execute();
     }
 
-    async editStatusOfTask(id: string, status: string): Promise<void> {
+    async editStatusOfTask({ id, status }: IEditTaskDTO): Promise<void> {
         await this.repository.createQueryBuilder("tasks").update().set({ status: status }).where("id = :id", { id }).execute();
     }
 
-    async editTask({ id, name, description, contributor }:IEditTaskDTO): Promise<void> {
-        const contributorUse = await this.connectionDataBase.getRepository('contributors').findOne({ where: {id: contributor} });
-        await this.repository.createQueryBuilder("tasks").update().set({ name: name, description: description, contributor: contributorUse }).where("id = :id", { id }).execute();
-    }
-
-    async editContributorOfTask(idTask: string, idContributor: string): Promise<void> {
-        const contributorUse = await this.connectionDataBase.getRepository('contributors').findOne({ where: {id: idContributor} });
-        await this.repository.createQueryBuilder("tasks").update().set({ contributor: contributorUse }).where("id = :id", { idTask }).execute();
-    }
-
-    async removeContrbutorOfTask(id: string): Promise<void> {
-        await this.repository.createQueryBuilder("tasks").update().set({ contributor: null }).where("id = :id", { id }).execute();
-        
+    async editTask({ id, name, description, contributor }: IEditTaskDTO): Promise<void> {
+        if(contributor) {
+            await this.repository.createQueryBuilder("tasks").update().set({ name, description, contributor }).where("id = :id", { id }).execute();
+        } else {
+            await this.repository.createQueryBuilder("tasks").update().set({ name, description, contributor: null }).where("id = :id", { id }).execute();
+        }
     }
 };
 

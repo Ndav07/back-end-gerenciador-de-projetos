@@ -30,12 +30,21 @@ class InMemoryProjectsRepository implements IProjectsRepository {
     }
 
     async editProject({ name, id, team }: IEditProjectDTO): Promise<void> {
-        this.projects.map((projects) => {
-            if(projects.id === id) {
-                projects.name = name;
-                projects.team = team;
-            }
-        });
+        if(team) {
+            this.projects.map((projects) => {
+                if(projects.id === id) {
+                    projects.name = name;
+                    projects.team = team;
+                }
+            });
+        } else {
+            this.projects.map((projects) => {
+                if(projects.id === id) {
+                    projects.name = name;
+                    projects.team = null;
+                }
+            });
+        }
     }
 };
 
