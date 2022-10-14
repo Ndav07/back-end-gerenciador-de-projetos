@@ -8,8 +8,12 @@ import { AppError } from "@shared/errors/AppError";
 class CreateUserUseCase {
     constructor(@inject("UsersRepository") private usersRepository: IUsersRepository) {};
     async execute({ email, password }: ICreateUserDTO): Promise<void> {
-        if(password.length > 30){
-            throw new AppError("Password grande");
+        if(password.length < 6) {
+            throw new AppError("Small password");
+        }
+        
+        if(password.length > 45) {
+            throw new AppError("Big password");
         }
 
         const userAlreadyEmailExists = await this.usersRepository.findByEmail(email);
